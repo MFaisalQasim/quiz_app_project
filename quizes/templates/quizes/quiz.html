@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Quiz : {{ obj.name }} {% endblock title %}
+
+{% block content %}
+{{ obj.name }}
+{% endblock content %}
+
+<script src="{% static 'quizes/main.js' %}"></script>
+{% block script %}
+{% endblock script %}
