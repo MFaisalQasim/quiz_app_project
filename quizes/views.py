@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import Quiz
 from django.views.generic import ListView
 from django.http import JsonResponse
+from questions.models import Question
 
 class QuizListView(ListView):
     model = Quiz
@@ -23,4 +24,25 @@ def quiz_data_view(request, pk):
     return JsonResponse({
         'data' : questions,
         'time' : quiz.time
+    })
+
+ 
+def quize_data_save(request, pk):
+    print(request.POST)
+    if request.ajax:
+        questions = []
+        data = request.POST
+        ord_data = dict(data.list())
+
+        ord_data.pop('csrfmiddlewaretoken')
+
+        for q_text in ord_data.keys():
+            question = Question.objects.get(text=q_text)
+            questions.append(question)
+        print(questions)
+
+        
+
+    return JsonResponse({
+        'data' : 'text',
     })
