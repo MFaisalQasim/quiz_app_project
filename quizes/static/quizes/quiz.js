@@ -8,7 +8,6 @@ $.ajax({
     const data = response.data;
     data.forEach((element) => {
       for (const [question, answers] of Object.entries(element)) {
-        console.log(question);
         quizBox.innerHTML += `
                 <hr>
                 <div>
@@ -53,7 +52,25 @@ const sendData = () => {
         url: `${url}/quize-data-save`,
         data: data,
         success: function (response) {
-            console.log(response);
+            const result = response.result
+            console.log(result);
+            quizForm.classList.add('not-visible')
+
+            result.forEach(res => {
+              console.log(res);
+              const resDiv = document.createElement('div')
+              for (const[question, answers] of Object.entries(res)){
+                resDiv.innerHTML += question
+                const cls = ['container', 'p-3', 'text-light', 'h3']
+                resDiv.classList.add(...cls)
+                if (answers=='not answered') {
+                  resDiv.innerHTML += '- not answered'
+                  resDiv.classList.add('bg-danger')
+                } else {
+                  
+                }
+              }
+            });
         },
         error: function (error) {
             console.log(error);
