@@ -1,12 +1,20 @@
 {% extends 'base.html' %} {% load static %} {% block title %}Quiz : {{ obj.name
 }} {% endblock title %} {% block content %}
 <br />
-<b>{{ obj.name }}</b>
+<div class="d-flex justify-content-between">
+  <b>{{ obj.name }}</b>
+  <b id="timer-box"></b>
+</div>
+<a href="{% url 'quizes:all-quizes' %}" class="btn bg-danger">
+  Go Back
+</a>
 <form action="" method="post" id="quiz-form">
-    {% csrf_token %}
+  {% csrf_token %}
   <div class="quiz-box" id="quiz-box"></div>
-  <button type="submit" id="submit" >Submit</button>
+  <button type="submit" class="btn bg-primary" id="submit">Submit</button>
 </form>
+<div id="score-box"></div>
+<div id="result-box"></div>
 {% endblock content %} {% block script %}
 <script src="{% static 'quizes/quiz.js' %}" defer></script>
 {% endblock script %}
